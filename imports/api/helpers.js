@@ -34,3 +34,27 @@ export const useResize = () => {
 
   return screenSize;
 }
+
+
+export const Logo =()=>{
+  const boxStyle = {
+    borderRadius: '50%',
+    boxShadow: '0 5px 7px 5px rgba(0, 0, 0, 0.2)',
+    backgroundColor: 'lightgray',
+    padding: '15px'
+  }
+  
+  style = {
+    textShadow: '2px 5px 2px rgba(0, 0, 0, 0.2)',
+    fontSize: '18px',
+    fontWidth: '600'
+  }
+
+  return(
+    <div style={boxStyle}>
+      <div style={style}>
+        EA-Social
+      </div>
+    </div>
+  )
+}

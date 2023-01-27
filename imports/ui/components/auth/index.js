@@ -3,16 +3,18 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import { Login } from "./login/login";
 import { Register } from "./register/register";
 import "./style.css";
-
+import { Logo } from "../../../api/helpers";
 
 export const AuthRouter = ()=>{
   return(
     <div  className='auth_layout'>
       <div className="header">
-        Welcome
+        <div className="logo_div">
+          <Logo/>
+        </div>
       </div>
       
-      <div className="content">
+      <div className="content" style={{height: 'auto'}}>
         <Routes>
           <Route path="/" element={<Navigate to={'/auth/login'}/>}/>
     

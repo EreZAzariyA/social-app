@@ -1,12 +1,19 @@
 import React from "react";
+import { Meteor } from "meteor/meteor";
 import { Form, Input, Button } from "antd";
 import { NavLink } from "react-router-dom";
 
 export const Login = ()=>{
 
   const onFinish = (values)=>{
-    console.log(values);
-  }
+    Meteor.loginWithPassword(values.email, values.password,(err,res)=>{
+      if(err){
+        return alert(err);
+      }
+      console.log(res);
+
+    });
+  };
 
   return(
     <div className="auth_form_container">

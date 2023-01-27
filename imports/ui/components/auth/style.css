@@ -5,13 +5,19 @@
 
 .auth_layout .header {
   height: 80px;
+  width: 100%;
   background-color: rgba(211, 211, 211, 0.2);
   font-size: 28px;
   font-weight: 600;
   display: flex;
-  justify-content: center;
   flex-direction: row;
   align-items: center;
+  position: relative;
+}
+
+.auth_layout .header .logo_div {
+  position: absolute;
+  left: 40px;
 }
 
 .auth_layout .content{
