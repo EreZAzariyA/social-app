@@ -1,8 +1,34 @@
 .main_layout {
-  height: 100%;
   text-align: center;
+  position: relative;
 }
 
+.main_layout .header{
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  width: 100%;
+  background-color: lightgray;
+}
+
+
 .main_layout .ant-layout .ant-layout-content {
-  height: auto;
+  height: 100%;
+  padding: 0 3% 3%;
+}
+
+.main_layout .ant-layout .ant-layout-sider.profile_sider {
+  height: 100%;
+  position: fixed;
+  top: 65px;
+  left: 0;
+  bottom: 0;
+}
+
+.main_layout .ant-layout .ant-layout-sider.seconde-sider {
+  height: 100%;
+  position: fixed;
+  top: 65px;
+  right: 0;
+  bottom: 0;
 }

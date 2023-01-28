@@ -1,23 +1,18 @@
-/* .main_container .inner_container{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-} */
-
-.main_container .inner_container .main{
-  border: 1px solid lightgray;
+.upload_main_container{
   border-radius: 10px;
-  padding: 20px 25px 0px 25px;
+  background-color: whitesmoke;
   box-shadow: 0px 5px 5px 5px rgba(0, 0, 0, 0.2);
 }
 
-.main_container .inner_container .main .actions_menu{
+.upload_main_container .upload_inner_container {
+  padding: 20px 25px 0px 25px;
+}
+
+.upload_main_container .upload_inner_container .main .actions_menu{
   width: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-}
-
-.main_container .inner_container .main .actions_menu .ant-menu-item{
+  background-color: whitesmoke;
 }

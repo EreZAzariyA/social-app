@@ -2,8 +2,10 @@ import React from "react";
 import {Meteor} from "meteor/meteor";
 import { useTracker } from 'meteor/react-meteor-data'
 import { Spin } from "antd";
-import "./style.css";
 import { UploadInput } from "./upload-input";
+import { Stories } from "./stories";
+import "./style.css";
+import { Posts } from "./posts";
 
 const Home = () => {
 
@@ -20,9 +22,20 @@ const Home = () => {
       <div className="home_main_container">
         <div className="home_inner_container">
           <div className="home_page">
-            <div className="header input">
+            
+            <div className="stories_section">
+              <Stories user={user}/>
+            </div>
+
+            <div className="upload_input_section">
               <UploadInput user={user}/>
             </div>
+
+            <div className="posts_section">
+              <Posts user={user}/>
+            </div>
+
+            <div></div>
 
           </div>
 

@@ -10,7 +10,7 @@ Meteor.publish('users.user',()=>{
 })
 
 Meteor.methods({
-  register(user) {
+  'register'(user) {
     const userId = Accounts.createUser({
       email:user.email,
       password: user.password,

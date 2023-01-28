@@ -23,9 +23,9 @@ const UserRouter = ()=>{
       return(
         <BrowserRouter>
           <Routes>
-            <Route path="/home/*" element={<App/>}/>
+            <Route path="/*" element={<App/>}/>
 
-            <Route path="*" element={<Navigate to={'/home/*'}/>}/>
+            <Route path="*" element={<Navigate to={'/*'}/>}/>
           </Routes>
         </BrowserRouter>
       );
