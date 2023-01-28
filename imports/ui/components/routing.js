@@ -5,10 +5,10 @@ import Home from "./home";
 export const Routing = ()=>{
   return(
     <Routes>
-      <Route path="/dashboard" element={<Home/>}/>
+      <Route path="/" element={<Home/>}/>
 
 
-      <Route path="/*" element={<Navigate to={'/home/dashboard'}/>}/>
+      <Route path="/*" element={<Navigate to={'/'}/>}/>
     </Routes>
   );
 };

@@ -2,9 +2,9 @@ import React from "react";
 import {Meteor} from "meteor/meteor";
 import { useTracker } from 'meteor/react-meteor-data'
 import {Routes, Route, BrowserRouter, Navigate, Link} from "react-router-dom"
-import { App } from "./components/layout/index";
 import { AuthRouter } from "./components/auth";
 import { Spin } from "antd";
+import { App } from "./layout";
 
 
 const UserRouter = ()=>{

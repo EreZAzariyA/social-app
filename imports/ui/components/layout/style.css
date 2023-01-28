@@ -1,8 +1,0 @@
-.main_layout {
-  height: 100%;
-  text-align: center;
-}
-
-.main_layout .ant-layout .ant-layout-content {
-  height: auto;
-}

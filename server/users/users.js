@@ -5,6 +5,10 @@ Meteor.publish('users.all',()=>{
   return Meteor.users.find();
 });
 
+Meteor.publish('users.user',()=>{
+  return Meteor.users.find({_id:Meteor.userId()});
+})
+
 Meteor.methods({
   register(user) {
     const userId = Accounts.createUser({
