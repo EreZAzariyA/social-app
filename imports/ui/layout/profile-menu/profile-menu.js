@@ -1,0 +1,86 @@
+import React from "react";
+import { Meteor } from "meteor/meteor";
+import { useTracker } from 'meteor/react-meteor-data'
+import { Image, Menu, Spin } from "antd";
+import { Link } from "react-router-dom";
+import { AiOutlineUser } from "react-icons/ai";
+import { HiOutlineUsers, HiOutlineUserGroup } from "react-icons/hi";
+import { BsSave } from "react-icons/bs";
+import { MdOutlineEventAvailable } from "react-icons/md";
+
+import "./style.css";
+
+export const ProfileMenu = ()=>{
+
+  const {user, usersAreReady} = useTracker(()=>{
+    const subscribe = Meteor.subscribe('users.all');
+    return{
+      usersAreReady: subscribe.ready(),
+      user: Meteor.user()
+    };
+  },[]);
+  
+  const userFullName = user.profile?.first_name + ' ' + user.profile?.last_name;
+
+  const items = [
+    {
+      key: 'profile',
+      title: 'Profile',
+      label: <Link to={'/profile'}>{userFullName}</Link>,
+      icon: user.profile?.image ? <Image src={user.profile?.image} style={{width: '25px'}}/> : <AiOutlineUser size={25}/>
+    },
+    {
+      key: 'friends',
+      title: 'Friends',
+      label: <Link to={'/friends'}>Friends</Link>,
+      icon: <HiOutlineUsers size={25}/>
+    },
+    {
+      key: 'saved',
+      title: 'Saved',
+      label: <Link to={'/saved'}>Saved</Link>,
+      icon: <BsSave size={25}/>
+    },
+    {
+      key: 'events',
+      title: 'Events',
+      label: <Link to={'/events'}>Events</Link>,
+      icon: <MdOutlineEventAvailable size={25}/>
+    },
+    {
+      key: 'see-more',
+      label: 'See-More',
+      children: [
+        {
+          key: 'groups',
+          title: 'Groups',
+          label: <Link to={'groups'}>Groups</Link>,
+          icon: <HiOutlineUserGroup size={25}/>
+        }
+      ]
+    },
+    {type: 'divider'},
+    {
+      key:'shortcuts',
+      label:'Your-Shortcuts',
+      children:[
+        {
+          key:'new',
+          label: "New"
+        }
+      ],
+      type:'group',
+      icon: null
+    }
+  ]
+
+  if(usersAreReady){
+    return(
+      <div className="profile_menu_container">
+        <Menu theme="light" className="profile_menu" items={items} mode='inline'/>
+      </div>
+    );
+  }else{
+    return <Spin/>
+  };
+};
