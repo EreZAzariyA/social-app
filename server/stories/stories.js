@@ -6,8 +6,7 @@ Meteor.publish('stories.user',()=>{
 });
 
 Meteor.methods({
-  'stories.create'(values){
-    console.log(values);
-    Stories.upsert(values);
-  }
+  // 'stories.create'(values){
+  //   Stories.upsert(values);
+  // }
 })

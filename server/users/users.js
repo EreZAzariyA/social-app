@@ -7,10 +7,21 @@ Meteor.publish('users.all',()=>{
 
 Meteor.publish('users.user',()=>{
   return Meteor.users.find({_id:Meteor.userId()});
-})
+});
 
 Meteor.methods({
   'register'(user) {
+    Accounts.onCreateUser((options,user)=>{
+      user.profile = options.profile || {};
+      user.social = {
+        friends: [],
+        posts: [],
+        saved: [],
+        events: [],
+        groups: []
+      };
+      return user
+    });
     const userId = Accounts.createUser({
       email:user.email,
       password: user.password,

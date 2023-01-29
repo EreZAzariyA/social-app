@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react"
+import { NavLink } from "react-router-dom";
 
 export const isAdmin = (user) => {
   return user && user.admin;
@@ -19,7 +20,7 @@ export const useResize = () => {
       width: window.innerWidth,
       height: window.innerHeight,
       isMobile: window.innerWidth < 768,
-      isResponsive: window.innerWidth < 1320
+      isResponsive: window.innerWidth < 992
     })
   }
 
@@ -47,14 +48,17 @@ export const Logo =()=>{
   style = {
     textShadow: '2px 5px 2px rgba(0, 0, 0, 0.2)',
     fontSize: '18px',
-    fontWidth: '600'
+    fontWidth: '600',
+    color: 'black'
   }
 
   return(
     <div style={boxStyle}>
-      <div style={style}>
-        EA-Social
-      </div>
+      <NavLink to={'/home'}>
+        <div style={style}>
+          EA-Social
+        </div>
+      </NavLink>
     </div>
   )
 }

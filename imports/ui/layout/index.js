@@ -3,7 +3,7 @@ import { Layout, Menu } from "antd";
 import { Header } from "./header/header";
 import { useResize } from "../../api/helpers";
 import { Routing } from "./routing";
-import { ProfileMenu } from "../components/profile-menu/profile-menu";
+import { ProfileMenu } from "../components/profile-menu";
 import "./style.css";
 
 const { Content, Sider} = Layout;
@@ -15,7 +15,7 @@ const items = [
 ]
 
 export const App = ()=>{
-  const { isMobile } = useResize();
+  const { isMobile, isResponsive } = useResize();
 
   return(
       <Layout className='main_layout'>
@@ -23,9 +23,14 @@ export const App = ()=>{
           <Header/>
         </div>
 
-        <Layout style={isMobile ? {}:{ marginLeft: '25em',marginRight:'15em' }}>
-          {!isMobile &&
-            <Sider theme="light" width={350} className="profile_sider">
+        <Layout 
+          style={!isResponsive ? { marginLeft: '21em',marginRight: '10.5em' } : !isMobile ? { marginRight: '10.5em'} : {}}
+        >
+          {!isResponsive &&
+            <Sider theme="light" 
+              width={350}
+              className="profile_sider"
+            >
               <ProfileMenu/>
             </Sider>
           }
@@ -35,7 +40,11 @@ export const App = ()=>{
           </Content>
 
           {!isMobile &&
-            <Sider theme="light" width={200} className="seconde-sider">
+            <Sider 
+              theme="light" 
+              width={200} 
+              className="seconde-sider"
+            >
               <Menu
                 mode="inline"
                 items={items}

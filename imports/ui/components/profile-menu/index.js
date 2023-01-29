@@ -26,25 +26,25 @@ export const ProfileMenu = ()=>{
     {
       key: 'profile',
       title: 'Profile',
-      label: <Link to={'/profile'}>{userFullName}</Link>,
+      label: <Link to={'home/profile'}>{userFullName}</Link>,
       icon: user.profile?.image ? <Image src={user.profile?.image} style={{width: '25px'}}/> : <AiOutlineUser size={25}/>
     },
     {
       key: 'friends',
       title: 'Friends',
-      label: <Link to={'/friends'}>Friends</Link>,
+      label: <Link to={'home/friends'}>Friends</Link>,
       icon: <HiOutlineUsers size={25}/>
     },
     {
       key: 'saved',
       title: 'Saved',
-      label: <Link to={'/saved'}>Saved</Link>,
+      label: <Link to={'home/saved'}>Saved</Link>,
       icon: <BsSave size={25}/>
     },
     {
       key: 'events',
       title: 'Events',
-      label: <Link to={'/events'}>Events</Link>,
+      label: <Link to={'home/events'}>Events</Link>,
       icon: <MdOutlineEventAvailable size={25}/>
     },
     {
@@ -72,7 +72,7 @@ export const ProfileMenu = ()=>{
       type:'group',
       icon: null
     }
-  ]
+  ];
 
   if(usersAreReady){
     return(
