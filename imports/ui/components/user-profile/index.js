@@ -19,12 +19,9 @@ const UserProfile = ()=>{
   console.log(user);
 
   if(userIsReady){
-
+    if(!user) return <h1>User not found</h1>
     return(
       <>
-        {!user && 
-          <h1>User not found</h1>
-        }
         <h1>{user.profile.first_name}</h1>
       </>
     );
