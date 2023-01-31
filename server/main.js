@@ -1,7 +1,8 @@
 import { Meteor } from 'meteor/meteor';
 import "./users/users";
-import "./users/user";
-import "./stories/stories";
+import "./user/user";
+import "./user/stories";
+import "./posts/posts";
 
 Meteor.startup(async () => {
 });

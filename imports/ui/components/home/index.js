@@ -4,16 +4,19 @@ import { useTracker } from 'meteor/react-meteor-data'
 import { Spin } from "antd";
 import { UploadInput } from "./upload-input";
 import { Stories } from "./stories";
-import "./style.css";
 import { Posts } from "./posts";
+import "./style.css";
+import { PostsDB } from "../../../api/posts/posts";
 
 const Home = () => {
 
-  const {usersAreReady,user} = useTracker(()=>{
+  const {usersAreReady,user, posts} = useTracker(()=>{
     const subscribe = Meteor.subscribe('users.user');
+    const allPosts = PostsDB.find({user_id:Meteor.userId()});
     return{
       usersAreReady: subscribe.ready(),
-      user: Meteor.user()
+      user: Meteor.user(),
+      posts: allPosts.fetch()
     }
   },[]);
 
@@ -28,7 +31,7 @@ const Home = () => {
             </div>
 
             <div className="upload_input_section">
-              <UploadInput user={user}/>
+              <UploadInput user={user} listOfPosts={posts}/>
             </div>
 
             <div className="posts_section">

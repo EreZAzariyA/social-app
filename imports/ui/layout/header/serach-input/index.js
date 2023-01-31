@@ -18,17 +18,18 @@ const SearchInput = ()=>{
       users: usersList.fetch()
     };
   },[]);
-
-  console.log(users);
+  // console.log(users);
 
   const onSearch = (searchText) => {
-    setOptions(
-      !searchText ? []
-      :
-      [Meteor.users.find().fetch()],
-    );
+    // const list = Meteor.users.find({profile:{'first_name':"n"}}).fetch();
+    // console.log(list);
   };
-
+  
+  // setOptions(
+  //   !searchText ? []
+  //   :
+  //   [users],
+  // );
   const onSelect = (data) => {
     console.log('onSelect', data);
   };

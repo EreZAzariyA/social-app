@@ -7,6 +7,10 @@
 .upload_main_container .upload_inner_container {
   padding: 20px 25px 0px 25px;
 }
+.upload_main_container .upload_inner_container .upload_post_form{
+  width: 100%;
+}
+
 
 .upload_main_container .upload_inner_container .main .actions_menu{
   width: 100%;
@@ -15,4 +19,9 @@
   align-items: center;
   justify-content: center;
   background-color: whitesmoke;
+}
+
+.upload_main_container .upload_inner_container .main .input {
+  display: flex;
+  flex-direction: row;
 }

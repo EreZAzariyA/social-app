@@ -7,7 +7,7 @@ export const PostCard = ({post})=>{
   if(post){
     return(
       <Card className="post_card">
-        <p>{post}</p>
+        <p>{post.post}</p>
       </Card>
     );
   }else if(!post || post === null){
