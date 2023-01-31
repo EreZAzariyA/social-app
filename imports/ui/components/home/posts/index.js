@@ -18,7 +18,6 @@ export const Posts = ({user})=>{
     }
   },[]);
 
-  console.log(posts);
 
 
   if(postsAreReady){
@@ -37,11 +36,11 @@ export const Posts = ({user})=>{
             </>
             }
   
-            {/* {posts &&
+            {posts &&
               posts.map(post=>
                 <PostCard key={post.id} post={post}/>
               )
-            } */}
+            }
           </div>
         </div>
       </div>
