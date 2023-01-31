@@ -19,7 +19,6 @@ export const Posts = ({user})=>{
   },[]);
 
 
-
   if(postsAreReady){
     return(
       <div className="posts_main_container">

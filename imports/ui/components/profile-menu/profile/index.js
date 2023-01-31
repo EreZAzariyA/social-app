@@ -1,9 +1,9 @@
 import React from "react";
 
-const UserProfile = ()=>{
+const Profile = ()=>{
   return(
-    <h1>User-Profile</h1>
+    <h1>Profile</h1>
   );
 };
 
-export default UserProfile;
+export default Profile;

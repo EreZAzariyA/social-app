@@ -2,48 +2,53 @@ import React, {useState} from "react";
 import { Meteor } from "meteor/meteor";
 import { useTracker } from 'meteor/react-meteor-data'
 import { AutoComplete, Spin } from "antd";
-
-const mockVal = (str, repeat = 1) => ({
-  value: str.repeat(repeat),
-});
+import { useNavigate } from "react-router-dom";
 
 const SearchInput = ()=>{
   const [options, setOptions] = useState([]);
+  const navigate = useNavigate();
 
   const {usersAreReady,users } = useTracker (()=>{
     const subscribe = Meteor.subscribe('users.all');
-    const usersList = Meteor.users.find();
+    const usersList = Meteor.users.find({}).fetch();
     return{
       usersAreReady: subscribe.ready(),
-      users: usersList.fetch()
+      users: usersList
     };
   },[]);
-  // console.log(users);
-
+  
   const onSearch = (searchText) => {
-    // const list = Meteor.users.find({profile:{'first_name':"n"}}).fetch();
-    // console.log(list);
+    if(!searchText||searchText === []) return;
+
+
+    const list = users.filter((user) => {
+      return JSON.stringify(user.profile.first_name).includes(searchText)
+      ||
+        JSON.stringify(user.profile.last_name).includes(searchText)
+    });
+    setOptions(list.map((option) => {
+      return {value: option.profile.first_name +' '+ option.profile.last_name , ...option}
+    }));
   };
   
-  // setOptions(
-  //   !searchText ? []
-  //   :
-  //   [users],
-  // );
-  const onSelect = (data) => {
-    console.log('onSelect', data);
+  const onSelect = (data,option) => {
+    navigate(`/users/user/${option._id}`);
   };
+
+
+
 
   if(usersAreReady){
     return(
       <div className="search_input_main_container">
         <div className="search_input_main_container">
-          <AutoComplete  options={options}
-          style={{
-            width: 200,
-          }}
-          onSelect={onSelect}
-          onSearch={onSearch}  placeholder="Search"/>
+          <AutoComplete
+            options={options}
+            style={{
+              width: 200,
+            }}
+            onSelect={onSelect}
+            onSearch={onSearch}  placeholder="Search"/>
         </div>
       </div>
     );
