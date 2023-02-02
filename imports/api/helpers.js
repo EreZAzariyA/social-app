@@ -8,6 +8,13 @@ export const isAdmin = (user) => {
   return user && user.admin;
 };
 
+export const Logout = ()=>{
+  Meteor.logout(err=>{
+    if(err){
+      alert(err);
+    };
+  });
+};
 
 export const ListType = {
   Friends: "Friends",
@@ -55,26 +62,10 @@ export const useResize = () => {
 
 
 export const Logo =()=>{
-
-  const boxStyle = {
-    borderRadius: '50%',
-    boxShadow: '0 5px 7px 5px rgba(0, 0, 0, 0.2)',
-    backgroundColor: '#0000005c',
-    padding: '10px'
-  }
-  
-  style = {
-    textShadow: '2px 5px 2px rgba(0, 0, 0, 0.2)',
-    fontSize: '18px',
-    fontWidth: '600',
-    color: 'white',
-    fontFamily: 'serif'
-  }
-
   return(
-    <div style={boxStyle}>
+    <div className="logo_container">
       <NavLink to={'/home'}>
-        <div style={style}>
+        <div className="logo">
           E.A
         </div>
       </NavLink>

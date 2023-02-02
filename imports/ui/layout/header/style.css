@@ -2,7 +2,7 @@
   height: 70px;
 }
 
-.header_main_container .header_container {
+.header_main_container .header_inner_container {
   height: 100%;
   width: min(100% - 5%,100%);
   margin: auto;
@@ -12,9 +12,17 @@
   align-items: center;
 }
 
+.header_main_container .header_inner_container .left_side {
+  width: 10%;
+}
 
-.header_main_container .header_container .search_box{
+.header_main_container .header_inner_container .center {
   width: 30%;
 }
-.header_main_container .header_container .menu_box .ant-menu >*{
+
+.header_main_container .header_inner_container .right_side {
+  width: 6%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }

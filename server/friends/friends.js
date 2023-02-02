@@ -23,11 +23,19 @@ Meteor.methods({
       }
     })
   },
-  'friends.accept.request'(){
-    
+  'friends.accept.request'(user_id){
+    FriendsDB.upsert({friend_id: this.userId,user_id:user_id},{
+      $set:{
+        "status": RelationshipSteps.APPROVED
+      }
+    })
   },
-  '.friends.reject.request'(){
-    
+  'friends.reject.request'(user_id){
+    FriendsDB.upsert({friend_id: this.userId,user_id:user_id},{
+      $set:{
+        "status": RelationshipSteps.REJECTED
+      }
+    })
   },
   '.friends.block.user'(){
 
