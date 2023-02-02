@@ -1,18 +1,27 @@
 import React from "react";
 import { useState, useEffect } from "react"
 import { NavLink } from "react-router-dom";
+import { FriendsDB } from "./friends/friends";
+import { Meteor } from "meteor/meteor";
 
 export const isAdmin = (user) => {
   return user && user.admin;
 };
 
 
-export const ListType = [
-  Friends = "Friends",
-  Posts = "Posts",
-  Saved = "Saved"
-]
+export const ListType = {
+  Friends: "Friends",
+  Posts:"Posts",
+  Saved:"Saved"
+}
 
+export const RelationshipSteps = {
+  REQUESTֹ_SENT: "REQUESTֹ_SENT",
+  WAITING_FOR_RESPONSE: "WAITING_FOR_RESPONSE",
+  APPROVED: "APPROVED",
+  REJECTED: "REJECTED",
+  BLOCKED: "BLOCKED"
+}
 
 
 export const useResize = () => {

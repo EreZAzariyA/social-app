@@ -8,7 +8,7 @@ const Friends = lazy(()=>import('../components/profile-menu/friends/index'));
 const Saved = lazy(()=>import('../components/profile-menu/saved/index'));
 const Events = lazy(()=>import('../components/profile-menu/events/index'));
 
-const UserProfile = lazy(()=>import('../components/user-profile/index'));
+const FriendProfile = lazy(()=>import('../components/friend-profile/index'));
 
 export const Routing = ()=>{
   return(
@@ -20,7 +20,7 @@ export const Routing = ()=>{
         <Route path="/home/saved" element={<Saved/>}/>
         <Route path="/home/events" element={<Events/>}/>
 
-        <Route path="/users/user/:user_id" element={<UserProfile/>}/>
+        <Route path="/users/user/:user_id" element={<FriendProfile/>}/>
 
 
         <Route path="/*" element={<Navigate to={'/home'}/>}/>
