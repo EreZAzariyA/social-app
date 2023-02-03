@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Meteor } from "meteor/meteor";
 import { useTracker } from 'meteor/react-meteor-data';
-import { Badge, Button, Dropdown, Spin, Tooltip } from "antd";
+import { Badge, Button, Dropdown, Image, Spin, Tooltip } from "antd";
 import {IoIosNotificationsOutline} from "react-icons/io";
-import {AiOutlineCheckCircle,AiOutlineCloseCircle} from "react-icons/ai";
-
-import "./style.css";
+import {AiOutlineCheckCircle,AiOutlineCloseCircle,AiOutlineUser} from "react-icons/ai";
 import { FriendsRequests } from "../../../../api/friends-requests/friends-requests";
 import { RelationshipSteps, RequestsType } from "../../../../api/helpers";
 import { NavLink } from "react-router-dom";
+import "./style.css";
 
 const Notifications = ()=>{
   const [count,setCount] = useState('');
@@ -30,6 +29,7 @@ const Notifications = ()=>{
     }
   },[]);
 
+  console.log(requests);
 
   useEffect(()=>{
     const count = friendRequests?.length;
@@ -58,9 +58,11 @@ const Notifications = ()=>{
   const items = sentUsers ? sentUsers.map((user)=>{
     return{
       label:
-        <NavLink to={`/users/user/${user._id}`} className="user_label">
+        <div className="user_label">
           <div className="name">
-            {user.profile.first_name + ' ' + user.profile.last_name}
+            <NavLink to={`users/user/${user._id}`}>
+              {user.profile.first_name + ' ' + user.profile.last_name}
+            </NavLink>
           </div>
           <div className="actions">
             <Tooltip title="Accept">
@@ -70,8 +72,9 @@ const Notifications = ()=>{
               <Button size="large" danger shape="circle" type="text" icon={<AiOutlineCloseCircle/>} onClick={()=>rejectRequest(user._id)}/>
             </Tooltip>
           </div>
-        </NavLink>,
-      key:user._id
+        </div>,
+      key:user._id,
+      icon: user.profile.image_profile ? <Image src={user.profile.image_profile}/> : <AiOutlineUser size={'20px'}/>
     }
   }):[{label:<Empty/>,key:'empty'}];
 

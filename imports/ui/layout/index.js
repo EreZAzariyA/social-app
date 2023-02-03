@@ -24,7 +24,7 @@ export const App = ()=>{
         </div>
 
         <Layout 
-          style={!isResponsive ? { marginLeft: '21em',marginRight: '10.5em' } : !isMobile ? { marginRight: '10.5em'} : {}}
+          style={!isResponsive ? { marginLeft: '25em',marginRight: '10.5em' } : !isMobile ? { marginRight: '10.5em'} : {}}
         >
           {!isResponsive &&
             <Sider theme="light" 
@@ -35,7 +35,7 @@ export const App = ()=>{
             </Sider>
           }
 
-          <Content style={{backgroundColor: 'whitesmoke'}}>
+          <Content>
             <Routing/>
           </Content>
 

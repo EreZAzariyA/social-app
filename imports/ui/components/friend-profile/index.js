@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {Meteor} from "meteor/meteor";
 import { useTracker } from 'meteor/react-meteor-data';
 import { useParams } from "react-router-dom";
@@ -6,29 +6,37 @@ import { Button, Spin, Tooltip } from "antd";
 import { RelationshipSteps } from "../../../api/helpers";
 import {FiUserPlus,FiUserX, FiUserCheck} from "react-icons/fi";
 import { FriendsRequests } from "../../../api/friends-requests/friends-requests";
+import { BiUserCheck, BiUserX } from "react-icons/bi";
+import "./style.css";
 
 const UserProfile = ()=>{
   const params = useParams();
+  const [toConfirm,setToConfirm] = useState(false);
 
-  const {friendProfileIsReady, friend, relationshipStatus} = useTracker(()=>{
+  const {friendProfileIsReady, friend, relationshipStatus, requests} = useTracker(()=>{
     const subscribe = Meteor.subscribe('friends-requests.user');
     const friendId = params.user_id;
     const currentUser = Meteor.users.findOne({_id:friendId});
-    const status = FriendsRequests.find({
-      $or: [
-        { user_id: Meteor.userId(), friend_id: friendId },
-        { user_id: friendId, friend_id: Meteor.userId() }
-      ]
-    }, { fields: { 'details': 1 } }).fetch();
-    
+    const allRequests = FriendsRequests.find({user_id:friendId}).fetch()
+    const status = FriendsRequests.find(
+      { user_id: Meteor.userId(), friend_id: friendId },
+      { fields: { 'details': 1 } }).fetch();
     
     return{
       friendProfileIsReady: subscribe.ready(),
       friend:currentUser,
-      relationshipStatus:status[0]
+      relationshipStatus:status[0],
+      requests: allRequests
     }
   },[params]);
 
+  useEffect(()=>{
+    requests.map((request)=>{
+      if(request.user_id === params.user_id){
+        setToConfirm(true);
+      }
+    });
+  },[params.user_id,requests]);
 
   const sendFriendRequest = () =>{
     Meteor.call('friends.requests.send', friend, err =>{
@@ -49,11 +57,24 @@ const UserProfile = ()=>{
     return(
       <>
         <h1>{friend.profile.first_name}</h1>
-
           {!relationshipStatus ?
-          <Tooltip title="Send-Request">
-            <Button shape="circle" icon={<FiUserPlus/>} onClick={sendFriendRequest}/>
-          </Tooltip>
+            <>
+              {toConfirm ?
+                <div className="to_confirm_container">
+                  <Tooltip title="Approve">
+                    <Button shape="circle" icon={<BiUserCheck/>} onClick={sendFriendRequest}/>
+                  </Tooltip>
+
+                  <Tooltip title="Denied">
+                    <Button shape="circle" danger icon={<BiUserX/>} onClick={sendFriendRequest}/>
+                  </Tooltip>
+                </div>
+              :
+                <Tooltip title="Send-Request">
+                  <Button shape="circle" icon={<FiUserPlus/>} onClick={sendFriendRequest}/>
+                </Tooltip>
+              }
+            </>
           :
             <>
             {relationshipStatus.details &&
