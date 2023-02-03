@@ -2,13 +2,12 @@ import React from "react";
 import {Meteor } from "meteor/meteor";
 import { useTracker } from 'meteor/react-meteor-data';
 import { Spin } from "antd";
-import { FriendsDB } from "../../../../api/friends/friends";
 
 const Friends = ()=>{
   
   const {friendsAreReady,friends} = useTracker(()=>{
     const subscribe = Meteor.subscribe('friends.user');
-    const friendsList = FriendsDB.find({user_id:Meteor.userId()}).fetch();
+    const friendsList = []
     return{
       friendsAreReady: subscribe.ready(),
       friends: friendsList

@@ -1,9 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react"
 import { NavLink } from "react-router-dom";
-import { FriendsDB } from "./friends/friends";
 import { Meteor } from "meteor/meteor";
-import { FriendsRequests } from "./friends-requests/friends-requests";
 
 export const isAdmin = (user) => {
   return user && user.admin;

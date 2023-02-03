@@ -8,7 +8,12 @@ Meteor.publish('friends-requests.all',(()=>{
 }));
 
 Meteor.publish('friends-requests.user',(()=>{
-  return FriendsRequests.find({friend_id:Meteor.userId()});
+  return FriendsRequests.find({
+    $or: [
+      { user_id: Meteor.userId() },
+      { friend_id: Meteor.userId() }
+    ]
+  });
 }));
 
 Meteor.methods({
@@ -27,6 +32,13 @@ Meteor.methods({
             sentDate: new Date().toJSON()
           }
         }
+      }
+    );
+  },'friends.requests.cancel'(userToCancelReq){
+    FriendsRequests.remove(
+      {
+        user_id:this.userId,
+        friend_id:userToCancelReq._id,
       }
     );
   },
