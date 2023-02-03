@@ -3,6 +3,7 @@ import { useState, useEffect } from "react"
 import { NavLink } from "react-router-dom";
 import { FriendsDB } from "./friends/friends";
 import { Meteor } from "meteor/meteor";
+import { FriendsRequests } from "./friends-requests/friends-requests";
 
 export const isAdmin = (user) => {
   return user && user.admin;
@@ -16,10 +17,24 @@ export const Logout = ()=>{
   });
 };
 
+export const checkFriendshipStatus = (user_id,friend_id)=>{
+  if(user_id === friend_id){
+    throw new Meteor.Error('Cant send request to yourself');
+  }else if(!Meteor.users.find({_id:friend_id}).fetch()){
+    throw new Meteor.Error('User not found');
+  }
+};
+
 export const ListType = {
   Friends: "Friends",
   Posts:"Posts",
   Saved:"Saved"
+}
+
+export const RequestsType = {
+  Friendship: "Friendship",
+  Game: "Game",
+  LiveStreaming: "LiveStreaming"
 }
 
 export const RelationshipSteps = {

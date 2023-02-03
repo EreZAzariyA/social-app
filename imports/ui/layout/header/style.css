@@ -1,5 +1,6 @@
 .header_main_container {
   height: 70px;
+  width: 100%;
 }
 
 .header_main_container .header_inner_container {
@@ -13,15 +14,15 @@
 }
 
 .header_main_container .header_inner_container .left_side {
-  width: 10%;
+  /* width: 10%; */
 }
 
 .header_main_container .header_inner_container .center {
-  width: 30%;
+  /* width: auto; */
 }
 
 .header_main_container .header_inner_container .right_side {
-  width: 6%;
+  width: 60px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;

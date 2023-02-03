@@ -4,24 +4,31 @@ import { useTracker } from 'meteor/react-meteor-data';
 import { Badge, Button, Dropdown, Spin, Tooltip } from "antd";
 import {IoIosNotificationsOutline} from "react-icons/io";
 import {AiOutlineCheckCircle,AiOutlineCloseCircle} from "react-icons/ai";
-import { FriendsDB } from "../../../../api/friends/friends";
-import { RelationshipSteps } from "../../../../api/helpers";
+
 import "./style.css";
+import { FriendsRequests } from "../../../../api/friends-requests/friends-requests";
+import { RelationshipSteps, RequestsType } from "../../../../api/helpers";
 
 const Notifications = ()=>{
   const [count,setCount] = useState('');
 
-  const {areReady, friendRequests, sentUsers} = useTracker(()=>{
-    const subscribe = Meteor.subscribe('user.friends');
-    const allFriendRequests = FriendsDB.find({friend_id:Meteor.userId(),status: RelationshipSteps.REQUESTֹ_SENT})
+  const {areReady, friendRequests,requests, sentUsers} = useTracker(()=>{
+    const subscribe = Meteor.subscribe('friends-requests.user');
+    const allRequests = FriendsRequests.find({friend_id:Meteor.userId()}).fetch()
+    const friendsRequests = allRequests.filter((request)=>{
+      return request.details.type === RequestsType.Friendship && request.details.status === RelationshipSteps.REQUESTֹ_SENT
+    })
+    const getSentUsers = friendsRequests.map((friendRequest)=>{
+      return Meteor.users.find({_id: friendRequest.user_id}).fetch()[0]
+    })
     return{
       areReady:subscribe.ready(),
-      friendRequests:allFriendRequests.fetch(),
-      sentUsers: allFriendRequests.map((friendRequest)=>{
-        return Meteor.users.find({_id:friendRequest.user_id}).fetch()[0];
-      })
+      friendRequests:friendsRequests,
+      requests:allRequests,
+      sentUsers: getSentUsers
     }
   },[]);
+
 
   useEffect(()=>{
     const count = friendRequests?.length;
@@ -29,7 +36,7 @@ const Notifications = ()=>{
   },[friendRequests]);
 
   const rejectRequest=(userToReject)=>{
-    Meteor.call('friends.reject.request',userToReject,err=>{
+    Meteor.call('friends.requests.reject',userToReject,err=>{
       if(err){
         return console.log(err);
       }
@@ -38,7 +45,7 @@ const Notifications = ()=>{
   }
 
   const acceptRequest = (userToApprove)=>{
-    Meteor.call('friends.accept.request',userToApprove,err=>{
+    Meteor.call('friends.requests.approve',userToApprove,err=>{
       if(err){
         return console.log(err);
       }
@@ -47,7 +54,7 @@ const Notifications = ()=>{
   }
 
 
-  const items = sentUsers.map((user)=>{
+  const items = sentUsers ? sentUsers.map((user)=>{
     return{
       label:
         <div className="user_label">
@@ -65,7 +72,7 @@ const Notifications = ()=>{
         </div>,
       key:user._id
     }
-  });
+  }):[];
 
 
   if(areReady){

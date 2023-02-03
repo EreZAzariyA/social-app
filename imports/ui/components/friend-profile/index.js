@@ -11,24 +11,21 @@ const UserProfile = ()=>{
   const params = useParams();
 
   const {friendProfileIsReady, friend, relationshipStatus} = useTracker(()=>{
-    const subscribe = Meteor.subscribe('friends.user');
+    const subscribe = Meteor.subscribe('user.friends');
     const friendId = params.user_id;
     const currentUser = Meteor.users.findOne({_id:friendId});
-    const relationships = FriendsDB.find({user_id:Meteor.userId(),friend_id:params.user_id},{fields:{'status':1}}).fetch()
     return{
       friendProfileIsReady: subscribe.ready(),
       friend:currentUser,
-      relationshipStatus:relationships[0]?.status
+      relationshipStatus:[]
     }
   },[params]);
 
 
 
-  console.log(relationshipStatus);
-
   const addFriend = () =>{
-    Meteor.call('friends.sent.request', friend, err =>{
-      if(err) return err;
+    Meteor.call('friends.requests.send', friend, err =>{
+      if(err) return alert(err);
       alert('request has been sent');
     })
   }
@@ -39,7 +36,7 @@ const UserProfile = ()=>{
       <>
         <h1>{friend.profile.first_name}</h1>
 
-          {!relationshipStatus &&
+          {!relationshipStatus || relationshipStatus.length === 0 &&
           <Tooltip title="Sent-Request">
             <Button shape="circle" icon={<FiUserPlus/>} onClick={addFriend}/>
           </Tooltip>
