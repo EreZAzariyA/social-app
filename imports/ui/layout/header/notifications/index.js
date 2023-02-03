@@ -8,6 +8,7 @@ import {AiOutlineCheckCircle,AiOutlineCloseCircle} from "react-icons/ai";
 import "./style.css";
 import { FriendsRequests } from "../../../../api/friends-requests/friends-requests";
 import { RelationshipSteps, RequestsType } from "../../../../api/helpers";
+import { NavLink } from "react-router-dom";
 
 const Notifications = ()=>{
   const [count,setCount] = useState('');
@@ -57,22 +58,22 @@ const Notifications = ()=>{
   const items = sentUsers ? sentUsers.map((user)=>{
     return{
       label:
-        <div className="user_label">
+        <NavLink to={`/users/user/${user._id}`} className="user_label">
           <div className="name">
             {user.profile.first_name + ' ' + user.profile.last_name}
           </div>
           <div className="actions">
             <Tooltip title="Accept">
-              <Button size="large" shape="circle" type="light" icon={<AiOutlineCheckCircle/>} onClick={()=>acceptRequest(user._id)}/>
+              <Button size="large" shape="circle" type="text" icon={<AiOutlineCheckCircle/>} onClick={()=>acceptRequest(user._id)}/>
             </Tooltip>
             <Tooltip title='Reject'>
-              <Button size="large" danger shape="circle" icon={<AiOutlineCloseCircle/>} onClick={()=>rejectRequest(user._id)}/>
+              <Button size="large" danger shape="circle" type="text" icon={<AiOutlineCloseCircle/>} onClick={()=>rejectRequest(user._id)}/>
             </Tooltip>
           </div>
-        </div>,
+        </NavLink>,
       key:user._id
     }
-  }):[];
+  }):[{label:<Empty/>,key:'empty'}];
 
 
   if(areReady){

@@ -1,5 +1,10 @@
 .notification_dropdown {
-  width: 200px;
+  width: 300px;
+  height: 200px;
+}
+
+.notification_dropdown .ant-dropdown {
+  
 }
 
 .user_label {

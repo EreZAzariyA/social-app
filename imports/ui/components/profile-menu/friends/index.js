@@ -14,7 +14,7 @@ const Friends = ()=>{
     }
   },[]);
 
-  console.log(friends);
+  // console.log(friends);
 
 
   if(friendsAreReady){
