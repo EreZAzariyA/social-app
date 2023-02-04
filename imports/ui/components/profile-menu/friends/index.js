@@ -6,7 +6,7 @@ import { Spin } from "antd";
 const Friends = ()=>{
   
   const {friendsAreReady,friends} = useTracker(()=>{
-    const subscribe = Meteor.subscribe('friends.user');
+    const subscribe = Meteor.subscribe('user.friends');
     const friendsList = []
     return{
       friendsAreReady: subscribe.ready(),

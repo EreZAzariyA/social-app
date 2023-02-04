@@ -29,8 +29,6 @@ const Notifications = ()=>{
     }
   },[]);
 
-  console.log(requests);
-
   useEffect(()=>{
     const count = friendRequests?.length;
     setCount(count);
@@ -66,10 +64,10 @@ const Notifications = ()=>{
           </div>
           <div className="actions">
             <Tooltip title="Accept">
-              <Button size="large" shape="circle" type="text" icon={<AiOutlineCheckCircle/>} onClick={()=>acceptRequest(user._id)}/>
+              <Button size="large" shape="circle" type="text" icon={<AiOutlineCheckCircle/>} onClick={()=>acceptRequest(user)}/>
             </Tooltip>
             <Tooltip title='Reject'>
-              <Button size="large" danger shape="circle" type="text" icon={<AiOutlineCloseCircle/>} onClick={()=>rejectRequest(user._id)}/>
+              <Button size="large" danger shape="circle" type="text" icon={<AiOutlineCloseCircle/>} onClick={()=>rejectRequest(user)}/>
             </Tooltip>
           </div>
         </div>,

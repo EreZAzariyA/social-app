@@ -38,17 +38,20 @@ export const Header = ()=>{
 
 
 
-        <div className="right_side">
-          <div className="notifications">
-            <Suspense fallback={<Spin/>}>
-              <Notifications/>
-            </Suspense>
-          </div>
+        <div className="right_side_container">
+          <div className="right_side">
 
-          <div className="auth">
-            <Dropdown menu={{items}} placement="bottomLeft" arrow trigger={['click','hover']}>
-              <VscAccount color="darkblue" size={'30px'}/>
-            </Dropdown>
+            <div className="notifications">
+              <Suspense fallback={<Spin/>}>
+                <Notifications/>
+              </Suspense>
+            </div>
+    
+            <div className="auth">
+              <Dropdown menu={{items}} placement="bottomLeft" arrow trigger={['click','hover']}>
+                <VscAccount color="darkblue" size={'30px'}/>
+              </Dropdown>
+            </div>
           </div>
         </div>
       </div>
