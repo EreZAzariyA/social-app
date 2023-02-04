@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Meteor } from "meteor/meteor";
 import { useTracker } from 'meteor/react-meteor-data';
-import { Badge, Button, Dropdown, Image, Spin, Tooltip } from "antd";
+import { Badge, Button, Dropdown, Image, Spin, Tooltip, Empty } from "antd";
 import {IoIosNotificationsOutline} from "react-icons/io";
 import {AiOutlineCheckCircle,AiOutlineCloseCircle,AiOutlineUser} from "react-icons/ai";
 import { FriendsRequests } from "../../../../api/friends-requests/friends-requests";
@@ -12,7 +12,7 @@ import "./style.css";
 const Notifications = ()=>{
   const [count,setCount] = useState('');
 
-  const {areReady, friendRequests,requests, sentUsers} = useTracker(()=>{
+  const {notificationsAreReady, friendRequests,requests, sentUsers} = useTracker(()=>{
     const subscribe = Meteor.subscribe('friends-requests.user');
     const allRequests = FriendsRequests.find({friend_id:Meteor.userId()}).fetch()
     const friendsRequests = allRequests.filter((request)=>{
@@ -22,7 +22,7 @@ const Notifications = ()=>{
       return Meteor.users.find({_id: friendRequest.user_id}).fetch()[0]
     })
     return{
-      areReady:subscribe.ready(),
+      notificationsAreReady:subscribe.ready(),
       friendRequests:friendsRequests,
       requests:allRequests,
       sentUsers: getSentUsers
@@ -53,7 +53,7 @@ const Notifications = ()=>{
   }
 
 
-  const items = sentUsers ? sentUsers.map((user)=>{
+  const items = sentUsers.length > 0 ? sentUsers.map((user)=>{
     return{
       label:
         <div className="user_label">
@@ -74,13 +74,13 @@ const Notifications = ()=>{
       key:user._id,
       icon: user.profile.image_profile ? <Image src={user.profile.image_profile}/> : <AiOutlineUser size={'20px'}/>
     }
-  }):[{label:<Empty/>,key:'empty'}];
+  }):[{label:<Empty />,key:'empty'}];
 
 
-  if(areReady){
+  if(notificationsAreReady){
     return(
       <Badge count={count}>
-        <Dropdown overlayClassName='notification_dropdown' menu={{items}} placement="bottomLeft" arrow trigger={['click','hover']}>
+        <Dropdown menu={{items}} placement="bottomLeft" arrow trigger={['click','hover']}>
           <IoIosNotificationsOutline color="darkblue" size={'30px'} onClick={()=>setCount('')}/>
         </Dropdown>
       </Badge>

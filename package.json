@@ -2,6 +2,7 @@
   "name": "social-app",
   "private": true,
   "scripts": {
+    "build": "meteor build --directory ./build",
     "start": "meteor run --settings settings.json",
     "start-admin": "meteor run -p 4000 --settings settings-admin.json",
     "test": "meteor test --once --driver-package meteortesting:mocha",

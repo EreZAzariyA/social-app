@@ -22,7 +22,9 @@ const SearchInput = ()=>{
 
 
     const list = users.filter((user) => {
-      return JSON.stringify(user.profile.first_name).includes(searchText)
+      return user._id !== Meteor.userId()
+      &&
+        JSON.stringify(user.profile.first_name).includes(searchText)
       ||
         JSON.stringify(user.profile.last_name).includes(searchText)
     });

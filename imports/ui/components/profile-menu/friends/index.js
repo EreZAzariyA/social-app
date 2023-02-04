@@ -1,34 +1,51 @@
-import React from "react";
+import React, { lazy } from "react";
 import {Meteor } from "meteor/meteor";
 import { useTracker } from 'meteor/react-meteor-data';
-import { Spin } from "antd";
+import { Space, Spin } from "antd";
+import { FriendsDB } from "../../../../api/friends/friends";
+import "./style.css";
+
+const FriendCard = lazy(()=>import('./friend-card/index'));
 
 const Friends = ()=>{
   
   const {friendsAreReady,friends} = useTracker(()=>{
     const subscribe = Meteor.subscribe('user.friends');
-    const friendsList = []
+    const user_id = Meteor.userId()
+    const friendsList = FriendsDB.find({user_id: user_id},{fields:{'friendsList':1}}).fetch()[0]?.friendsList;
+    const getFriendsProfile = friendsList ? friendsList.map((friend)=>{
+     return Meteor.users.find({_id: friend.friend_id}).fetch();
+    }) : [];
     return{
       friendsAreReady: subscribe.ready(),
-      friends: friendsList
+      friends: getFriendsProfile[0]
     }
   },[]);
 
-  // console.log(friends);
-
-
   if(friendsAreReady){
     return(
-      <>
-        <h1>Friends</h1>
-        {friends === undefined || !friends || friends?.length === 0 &&
-        <>
-          <p>No Friends</p>
-          <p>Add some to see them here</p>
-        
-        </>
-        }
-      </>
+      <div className="friends_list_main_container">
+        <div className="friends_list_inner_container">
+          <h1>Friends</h1>
+          {
+            !friends || friends?.length === 0
+            ?
+            <div className="undefine_friends_list">
+              <p>No Friends</p>
+              <p>Add some to see them here</p>
+            </div>
+            :
+            <div className="friends_list">
+              <Space direction="horizontal">
+                {friends?.map((friend)=>{
+                  return <FriendCard key={friend._id} friend={friend}/>
+                  })
+                }
+              </Space>
+            </div>
+          }
+        </div>
+      </div>
     );
   }
   else return <Spin/>
