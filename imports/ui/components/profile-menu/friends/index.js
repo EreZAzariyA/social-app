@@ -14,11 +14,11 @@ const Friends = ()=>{
     const user_id = Meteor.userId()
     const friendsList = FriendsDB.find({user_id: user_id},{fields:{'friendsList':1}}).fetch()[0]?.friendsList;
     const getFriendsProfile = friendsList ? friendsList.map((friend)=>{
-     return Meteor.users.find({_id: friend.friend_id}).fetch();
+     return Meteor.users.find({_id: friend.friend_id}).fetch()[0];
     }) : [];
     return{
       friendsAreReady: subscribe.ready(),
-      friends: getFriendsProfile[0]
+      friends: getFriendsProfile
     }
   },[]);
 
@@ -37,9 +37,9 @@ const Friends = ()=>{
             :
             <div className="friends_list">
               <Space direction="horizontal">
-                {friends?.map((friend)=>{
-                  return <FriendCard key={friend._id} friend={friend}/>
-                  })
+                {friends?.map((friend)=>
+                  <FriendCard key={friend._id} friend={friend}/>
+                  )
                 }
               </Space>
             </div>

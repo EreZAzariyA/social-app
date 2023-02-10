@@ -5,10 +5,7 @@ Meteor.publish('posts',() =>{
   if(!Meteor.user()) throw new Meteor.Error('No User');
   return PostsDB.find({});
 });
-Meteor.publish('posts.user',() =>{
-  if(!Meteor.user()) throw new Meteor.Error('No User');
-  return PostsDB.find({user_id:Meteor.userId()});
-});
+
 
 Meteor.methods({
   'posts.create'({allPosts, userId}){

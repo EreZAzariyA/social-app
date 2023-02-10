@@ -11,7 +11,7 @@ const FriendCard = ({friend})=>{
     className="friend_card"
     hoverable
     cover={
-        friend.profile.profile_img
+        friend.profile?.profile_img
       ?
         friend.profile.profile_img
       :

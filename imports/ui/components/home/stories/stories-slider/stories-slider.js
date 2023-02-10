@@ -1,9 +1,9 @@
 import React from "react";
 import "./style.css";
-import Slider from "react-slick";
 import { StoryCard } from "../story-card/card";
+import Slider from "react-slick";
 import "slick-carousel/slick/slick.css"; 
-import "slick-carousel/slick/slick-theme.css";
+// import "slick-carousel/slick/slick-theme.css";
 
 
 export const StoriesSlider = ({stories})=>{

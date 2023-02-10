@@ -25,6 +25,7 @@ const UserProfile = ()=>{
     const allRequests = FriendsRequests.find({friend_id:Meteor.userId()}).fetch();
     
     // To figure out the request details:
+    // Check if there is a relationship between the current user to the logged-in user:
     const status = FriendsRequests.find(
       {
         $or: [
@@ -54,13 +55,9 @@ const UserProfile = ()=>{
     friendsRequests?.map((request)=>{
       if(request.details.status === RelationshipSteps.REQUESTֹ_SENT){
         setToConfirm(true);
-        console.log("need to confirm");
       }
-      console.log(request);
     });
-  });
-
-// console.log(relationshipStatus);
+  },[friendsRequests,params]);
 
   const sendFriendRequest = () =>{
     Meteor.call('friends.requests.send', friend, err =>{
