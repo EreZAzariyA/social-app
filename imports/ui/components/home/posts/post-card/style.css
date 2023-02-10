@@ -3,27 +3,29 @@
   background-color: whitesmoke;
   box-shadow: 0px 5px 5px 5px rgba(0, 0, 0, 0.2);
   margin: 20px 0px 0px 0px;
-
 }
 .post_card .ant-card-head{
   display: flex;
   flex-direction: row;
 }
-
-.post_card .ant-card-head .ant-card-head-wrapper {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
 .post_card .ant-card-head .ant-card-head-wrapper .ant-card-head-title {
   flex: none;
   text-overflow: unset;
   width: 100px;
-  white-space: normal
+  white-space: normal;
+  font-weight: normal !important;
 }
 
-.post_card .ant-card-head .ant-card-head-wrapper .ant-card-extra {
-  margin-inline-start: 0;
+.post_card .comments_container .ant-card.comments_card_container{
+  margin-bottom: 10px;
+}
+.post_card .comments_container .ant-card.comments_card_container .ant-card-body{
+  padding: 10px 20px 0 20px;
+}
+
+.post_card .comments_container .comments_card_container .comments_counter{
+  display: flex;
+  flex-direction: row;
+  align-items:center;
+  justify-content: space-between;
 }

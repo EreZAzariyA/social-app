@@ -43,6 +43,7 @@ export const Header = ()=>{
         </div>
         
 
+        
         <div className="center">
           <div className="search_box">
             <SearchInput/>

@@ -15,16 +15,15 @@ const items = [
 export const UploadInput = ({user, listOfPosts,post})=>{
   const [form] = Form.useForm();
 
-
-
   const onFinish = (values)=>{
+    values.comments = [];
     const postToSave = {
       id: post?.id ? post.id: Random.id(),
       ...values,
       dateCreated: new Date().toJSON()
     }
 
-    Meteor.call('posts.create',{allPosts:[postToSave],userId:user._id},(err)=>{
+    Meteor.call('posts.create',{postToSave:[postToSave],userId:user._id},(err)=>{
         if(err) {
           return alert(err);
         } else {

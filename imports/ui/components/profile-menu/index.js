@@ -8,6 +8,7 @@ import { HiOutlineUsers, HiOutlineUserGroup } from "react-icons/hi";
 import { BsSave } from "react-icons/bs";
 import { MdOutlineEventAvailable } from "react-icons/md";
 import "./style.css";
+import { getFullName } from "../../../api/helpers";
 
 export const ProfileMenu = ()=>{
 
@@ -19,7 +20,7 @@ export const ProfileMenu = ()=>{
     };
   },[]);
 
-  const userFullName = user.profile?.first_name + ' ' + user.profile?.last_name;
+  const userFullName = getFullName(user);
 
   const items = [
     {

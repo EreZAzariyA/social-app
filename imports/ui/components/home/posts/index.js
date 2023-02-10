@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { lazy, useEffect, useState } from "react";
 import {Meteor} from "meteor/meteor";
 import { useTracker } from 'meteor/react-meteor-data'
-import { PostCard } from "./post-card/post-card";
-import "./style.css";
 import { PostsDB } from "../../../../api/posts/posts";
 import { FriendsDB } from "../../../../api/friends/friends";
-
 import { Card, Spin } from "antd";
+import "./style.css";
+
+const PostCard = lazy(()=>import('./post-card/index'));
+
 
 export const Posts = ({user})=>{
 
@@ -48,7 +49,6 @@ export const Posts = ({user})=>{
       <div className="posts_main_container">
         <div className="posts_inner_container">
           <div className="posts">
-
             {allPosts
             ?
               allPosts
