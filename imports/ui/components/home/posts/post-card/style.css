@@ -5,3 +5,25 @@
   margin: 20px 0px 0px 0px;
 
 }
+.post_card .ant-card-head{
+  display: flex;
+  flex-direction: row;
+}
+
+.post_card .ant-card-head .ant-card-head-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.post_card .ant-card-head .ant-card-head-wrapper .ant-card-head-title {
+  flex: none;
+  text-overflow: unset;
+  width: 100px;
+  white-space: normal
+}
+
+.post_card .ant-card-head .ant-card-head-wrapper .ant-card-extra {
+  margin-inline-start: 0;
+}

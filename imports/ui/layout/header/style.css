@@ -28,3 +28,13 @@
   flex-direction: row;
   justify-content: space-between;
 }
+.header_main_container .header_inner_container .left_side_container {
+  grid-column: span 1;
+}
+.header_main_container .header_inner_container .left_side_container .left_side {
+  width: 100px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}

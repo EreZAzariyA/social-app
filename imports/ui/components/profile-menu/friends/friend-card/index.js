@@ -8,6 +8,7 @@ const { Meta } = Card;
 const FriendCard = ({friend})=>{
   return(
     <Card
+    style={{width:'300px'}}
     className="friend_card"
     hoverable
     cover={

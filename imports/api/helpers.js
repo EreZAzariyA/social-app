@@ -85,3 +85,8 @@ export const Logo =()=>{
     </div>
   )
 }
+
+export const getFullName = (user)=>{
+  const fullName = user.profile.first_name + " " + user.profile.last_name;
+  return fullName;
+}

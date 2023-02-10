@@ -1,25 +1,17 @@
 import React from "react";
-import { Meteor } from "meteor/meteor";
-import { useTracker } from 'meteor/react-meteor-data'
-import { Image, Menu, Spin } from "antd";
+import {Meteor} from "meteor/meteor";
+import { Button, Dropdown, Menu } from "antd";
+import {BiMenuAltLeft} from "react-icons/bi";
 import { Link } from "react-router-dom";
+import { getFullName } from "../../../../api/helpers";
 import { AiOutlineUser } from "react-icons/ai";
 import { HiOutlineUsers, HiOutlineUserGroup } from "react-icons/hi";
 import { BsSave } from "react-icons/bs";
 import { MdOutlineEventAvailable } from "react-icons/md";
-import "./style.css";
 
-export const ProfileMenu = ()=>{
-
-  const {user, usersAreReady} = useTracker(()=>{
-    const subscribe = Meteor.subscribe('users.all');
-    return{
-      usersAreReady: subscribe.ready(),
-      user: Meteor.user()
-    };
-  },[]);
-
-  const userFullName = user.profile?.first_name + ' ' + user.profile?.last_name;
+const Bookmarks = ()=>{
+  const user = Meteor.user();
+  const userFullName = getFullName(user);
 
   const items = [
     {
@@ -73,13 +65,13 @@ export const ProfileMenu = ()=>{
     }
   ];
 
-  if(usersAreReady){
-    return(
-      <div className="profile_menu_container">
-        <Menu theme="light" className="profile_menu" items={items} mode='inline'/>
-      </div>
-    );
-  }else{
-    return <Spin/>
-  };
-};
+  return(
+    <>
+      <Dropdown menu={{items}} placement="bottomRight" arrow trigger={["click","hover"]}>
+          <BiMenuAltLeft color="darkblue" size={'30px'}/>
+      </Dropdown>
+    </>
+  )
+}
+
+export default Bookmarks;

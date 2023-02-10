@@ -21,12 +21,7 @@ export const Posts = ({user})=>{
     const friendsPosts = allFriends?.map((friend)=>{
       return PostsDB.find({user_id:friend.friend_id},{fields:{'posts':1}}).fetch()[0];
     });
-
-    const allFriendsPosts = friendsPosts ? friendsPosts[0]?.posts : undefined
-    // const allFriendsPosts = friendsPosts?.map((postsList)=>{
-    //   return postsList?.posts ? postsList[0]?.posts : []
-    // })
-
+    const allFriendsPosts = friendsPosts ? friendsPosts[0]?.posts : undefined;
     return {
       postsAreReady:subscribe.ready(),
       posts:myPosts[0]?.posts,
@@ -40,7 +35,11 @@ export const Posts = ({user})=>{
     if(posts && friendsPosts){
       const list = posts.concat(friendsPosts);
       setAllPosts(list);
-    }
+    }else if(!posts && friendsPosts){
+      setAllPosts(friendsPosts);
+    }else if(posts && !friendsPosts){
+      setAllPosts(posts)
+    }else setAllPosts(undefined);
   },[friendsPosts,posts])
 
 
@@ -59,9 +58,9 @@ export const Posts = ({user})=>{
                 <PostCard key={post.id} post={post}/>
               )
             :
-              Array(4).fill(null).map((_, index) => {
-                return <Card key={index} card={null} />;
-              })
+              Array(4).fill(null).map((_, index) => 
+                <Card key={index} post={null} />
+              )
             }
           </div>
         </div>
