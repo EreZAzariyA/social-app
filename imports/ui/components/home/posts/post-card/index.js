@@ -1,5 +1,5 @@
 import React, { lazy, useState } from "react";
-import { Button, Card, Divider, Dropdown, Input } from "antd";
+import { Button, Card, Divider, Dropdown, Input, Space } from "antd";
 import {Meteor} from "meteor/meteor";
 import { useTracker } from 'meteor/react-meteor-data';
 import "./style.css";
@@ -42,7 +42,7 @@ const PostCard = ({post})=>{
     return(
       <Card
         className="post_card"
-        title={fullName + " "+  new Date(post.dateCreated).toLocaleDateString()}
+        title={fullName + " " + new Date(post.dateCreated).toLocaleDateString()}
         >
           <div className="post">
             <p>{post.post}</p>
@@ -52,14 +52,19 @@ const PostCard = ({post})=>{
           <div className="comments_container">
             {comments.length > 0 &&
               <div className="comments">
+                <Card className="comments_card_container">
+                  <Space
+                    direction="vertical"
+                    size="middle"
+                    style={{ display: 'flex' }}
+                    >
+                    {comments?.map((comment)=>
+                        <CommentCard key={comment.id} comment={comment} />
+                      )
+                    }
+                  </Space>
 
-              <Card className="comments_card_container">
-                {comments?.map((comment)=>
-                    <CommentCard key={comment.id} comment={comment} />
-                  )
-                }
-
-                <div className="comments_counter">
+                  <div className="comments_counter">
                   {comments?.length > 0
                   ?
                     <>
@@ -69,8 +74,8 @@ const PostCard = ({post})=>{
                   :
                     <p>No comments</p>
                   }
-                </div>
-              </Card>
+                  </div>
+                </Card>
               </div>
             }
 
@@ -88,7 +93,7 @@ const PostCard = ({post})=>{
       </Card>
     );
   }
-  else if(!post || post === null){
+  else if(!post && post === null){
     return(
       <Card className="post_card empty_post_card">
         <h1>No Post</h1>

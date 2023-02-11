@@ -10,8 +10,6 @@ export const Login = ()=>{
       if(err){
         return alert(err);
       }
-      console.log(res);
-
     });
   };
 

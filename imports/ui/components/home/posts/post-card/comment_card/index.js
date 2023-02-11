@@ -13,13 +13,13 @@ const CommentCard = ({comment})=>{
       commentedUser:user
     }
   },[]);
-
-  console.log(comment);
   
   return(
-    <Card type="inner" className="comment_card">
-      {/* <Image src={commentedUser} sizes="20px"/> */}
-      <BiUserCircle size={'20px'}/>
+    <Card type="inner" size="small" className="comment_card">
+      <p>
+        <BiUserCircle size={'20px'}/>
+        {commentedUser[0].profile.first_name}
+      </p>
       <p>
         {comment.text}
       </p>

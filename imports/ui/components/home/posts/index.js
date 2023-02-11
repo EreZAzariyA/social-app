@@ -59,7 +59,9 @@ export const Posts = ({user})=>{
               )
             :
               Array(4).fill(null).map((_, index) => 
-                <Card key={index} post={null} />
+                <Card key={index}>
+                  <p>No-Post</p>
+                </Card>
               )
             }
           </div>
