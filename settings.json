@@ -1,5 +1,10 @@
 {
   "PUBLIC":{
     "IS_CLIENT": true
+  },
+  "AWS":{
+    "ACCESS_KEY_ID": "AKIAYA4AE4RKZPLBWB2R",
+    "SECRET_ACCESS_KEY": "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",
+    "REGION": "eu-central-1"
   }
 }

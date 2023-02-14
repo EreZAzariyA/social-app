@@ -5,6 +5,7 @@ import {Routes, Route, BrowserRouter, Navigate, Link} from "react-router-dom"
 import { AuthRouter } from "./components/auth";
 import { Spin } from "antd";
 import { App } from "./layout";
+import Profile from "./components/bookmarks/profile";
 
 
 const UserRouter = ()=>{
@@ -24,8 +25,9 @@ const UserRouter = ()=>{
         <BrowserRouter>
           <Routes>
             <Route path="/*" element={<App/>}/>
+            <Route path="/profile" element={<Profile/>}/>
 
-            <Route path="*" element={<Navigate to={'/*'}/>}/>
+            <Route path="/*" element={<Navigate to={'/*'}/>}/>
           </Routes>
         </BrowserRouter>
       );

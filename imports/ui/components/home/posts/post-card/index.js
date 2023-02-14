@@ -24,8 +24,6 @@ const PostCard = ({post})=>{
     }
   },[post?.comments]);
 
-  const fullName = getFullName(user);
-
   const addComment = ()=>{
     const user_id = Meteor.userId();
     const mainPost_id = fullPostDetails[0]?._id;
@@ -42,7 +40,7 @@ const PostCard = ({post})=>{
     return(
       <Card
         className="post_card"
-        title={fullName + " " + new Date(post.dateCreated).toLocaleDateString()}
+        title={getFullName(user) + " " + new Date(post.dateCreated).toLocaleDateString()}
         >
           <div className="post">
             <p>{post.post}</p>

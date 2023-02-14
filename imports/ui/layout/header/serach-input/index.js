@@ -18,33 +18,33 @@ const SearchInput = ()=>{
   },[]);
   
   const onSearch = (searchText) => {
-    if(!searchText||searchText === []) return;
-
-
-    const list = users.filter((user) => {
-      return user._id !== Meteor.userId()
-      &&
+    if(!searchText||searchText === '') {
+      return;
+    }else{
+      const list = users.filter((user) => {
+        // Remove the current user
+        return user._id !== Meteor.userId()
+        &&
         JSON.stringify(user.profile.first_name).includes(searchText)
-      ||
+        ||
         JSON.stringify(user.profile.last_name).includes(searchText)
-    });
-    setOptions(list.map((option) => {
-      return {value: option.profile.first_name +' '+ option.profile.last_name , ...option}
-    }));
+      });
+      setOptions(list.map((option) => {
+        return {value: option.profile.first_name +' '+ option.profile.last_name , ...option}
+      }));
+    }
   };
   
   const onSelect = (data,option) => {
     navigate(`/users/user/${option._id}`);
   };
 
-
-
-
   if(usersAreReady){
     return(
       <div className="search_input_main_container">
         <div className="search_input_main_container">
           <AutoComplete
+            allowClear
             options={options}
             style={{
               width: 200,

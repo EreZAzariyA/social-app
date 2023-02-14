@@ -4,9 +4,9 @@ import { PostsDB } from "../../imports/api/posts/posts";
 import { StoriesDB } from "../../imports/api/stories/stories";
 
 
-// Meteor.publish('user',()=>{
-//   return Meteor.users.find({});
-// })
+Meteor.publish('user',()=>{
+  return Meteor.users.find({_id:Meteor.userId()});
+})
 
 Meteor.publish('user.friends',()=>{
   if(!Meteor.user()) throw new Meteor.Error('No-user');

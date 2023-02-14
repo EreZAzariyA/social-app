@@ -1,10 +1,11 @@
-import React from "react";
+import React, { lazy } from "react";
 import { Layout, Menu } from "antd";
 import { Header } from "./header/header";
 import { useResize } from "../../api/helpers";
 import { Routing } from "./routing";
-import { ProfileMenu } from "../components/profile-menu";
 import "./style.css";
+
+const Bookmarks = lazy(()=>import('../components/bookmarks/index'));
 
 const { Content, Sider} = Layout;
 
@@ -31,7 +32,7 @@ export const App = ()=>{
               width={350}
               className="profile_sider"
             >
-              <ProfileMenu/>
+              <Bookmarks/>
             </Sider>
           }
 
