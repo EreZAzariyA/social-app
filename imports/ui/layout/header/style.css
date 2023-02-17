@@ -1,5 +1,10 @@
 .header_main_container {
   height: 70px;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  width: 100%;
+  background-color: lightgray;
 }
 
 .header_main_container .header_inner_container {

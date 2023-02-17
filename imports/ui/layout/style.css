@@ -3,15 +3,6 @@
   position: relative;
 }
 
-.main_layout .header{
-  position: sticky;
-  top: 0;
-  z-index: 1;
-  width: 100%;
-  background-color: lightgray;
-}
-
-
 .main_layout .ant-layout .ant-layout-content {
   height: 100%;
   padding: 0 3% 3%;

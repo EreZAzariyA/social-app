@@ -1,18 +1,15 @@
 import React, { lazy, Suspense } from "react";
-import { Meteor } from "meteor/meteor";
-import { useTracker } from 'meteor/react-meteor-data';
 import { Button, Dropdown, Spin } from "antd";
 import { VscAccount } from "react-icons/vsc";
 import { Logo,Logout, useResize } from "../../../api/helpers";
 import SearchInput from "./serach-input";
-import {IoIosNotificationsOutline} from "react-icons/io";
 import "./style.css";
 
 const Notifications = lazy(()=>import('./notifications/index'));
 const Bookmarks = lazy(()=>import('./bookmarks/index'));
 
 export const Header = ()=>{
-  const {isMobile, isResponsive} = useResize();
+  const {isResponsive} = useResize();
 
   const items = [
     {

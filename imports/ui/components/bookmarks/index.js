@@ -10,7 +10,7 @@ import { MdOutlineEventAvailable } from "react-icons/md";
 import "./style.css";
 import { getFullName } from "../../../api/helpers";
 
-export const ProfileMenu = ()=>{
+const Bookmarks = ()=>{
 
   const {user, usersAreReady} = useTracker(()=>{
     const subscribe = Meteor.subscribe('users.all');
@@ -20,13 +20,11 @@ export const ProfileMenu = ()=>{
     };
   },[]);
 
-  const userFullName = getFullName(user);
-
   const items = [
     {
       key: 'profile',
       title: 'Profile',
-      label: <Link to={'home/profile'}>{userFullName}</Link>,
+      label: <Link to={'/profile'}>{getFullName(user)}</Link>,
       icon: user.profile?.image ? <Image src={user.profile?.image} style={{width: '25px'}}/> : <AiOutlineUser size={25}/>
     },
     {
@@ -84,3 +82,5 @@ export const ProfileMenu = ()=>{
     return <Spin/>
   };
 };
+
+export default Bookmarks;
