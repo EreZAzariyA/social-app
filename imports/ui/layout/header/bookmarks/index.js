@@ -16,25 +16,25 @@ const Bookmarks = ()=>{
     {
       key: 'profile',
       title: 'Profile',
-      label: <Link to={'profile'}>{getFullName(user)}</Link>,
+      label: <Link to={'/profile'}>{getFullName(user)}</Link>,
       icon: user.profile?.image ? <Image src={user.profile?.image} style={{width: '25px'}}/> : <AiOutlineUser size={25}/>
     },
     {
       key: 'friends',
       title: 'Friends',
-      label: <Link to={'home/friends'}>Friends</Link>,
+      label: <Link to={'/home/friends'}>Friends</Link>,
       icon: <HiOutlineUsers size={25}/>
     },
     {
       key: 'saved',
       title: 'Saved',
-      label: <Link to={'home/saved'}>Saved</Link>,
+      label: <Link to={'/home/saved'}>Saved</Link>,
       icon: <BsSave size={25}/>
     },
     {
       key: 'events',
       title: 'Events',
-      label: <Link to={'home/events'}>Events</Link>,
+      label: <Link to={'/home/events'}>Events</Link>,
       icon: <MdOutlineEventAvailable size={25}/>
     },
     {
@@ -44,7 +44,7 @@ const Bookmarks = ()=>{
         {
           key: 'groups',
           title: 'Groups',
-          label: <Link to={'groups'}>Groups</Link>,
+          label: <Link to={'/groups'}>Groups</Link>,
           icon: <HiOutlineUserGroup size={25}/>
         }
       ]

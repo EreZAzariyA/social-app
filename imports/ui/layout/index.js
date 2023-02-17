@@ -1,5 +1,5 @@
-import React, { lazy } from "react";
-import { Layout, Menu } from "antd";
+import React, { lazy, Suspense } from "react";
+import { Layout, Menu, Spin } from "antd";
 import { Header } from "./header/header";
 import { useResize } from "../../api/helpers";
 import { Routing } from "./routing";
@@ -15,7 +15,7 @@ const items = [
   {key:'c',label:'c',icon:null,title:'c'},
 ]
 
-export const App = ()=>{
+const App = ()=>{
   const { isMobile, isResponsive } = useResize();
 
   return(
@@ -32,7 +32,9 @@ export const App = ()=>{
               width={350}
               className="profile_sider"
             >
-              <Bookmarks/>
+              <Suspense fallback={<Spin/>}>
+                <Bookmarks />
+              </Suspense>
             </Sider>
           }
 
@@ -55,4 +57,6 @@ export const App = ()=>{
         </Layout>
       </Layout>
   )
-}
+};
+
+export default App;

@@ -7,7 +7,7 @@ const Friends = lazy(()=>import('../components/bookmarks/friends/index'));
 const Saved = lazy(()=>import('../components/bookmarks/saved/index'));
 const Events = lazy(()=>import('../components/bookmarks/events/index'));
 
-const FriendProfile = lazy(()=>import('../components/bookmarks/index'));
+const FriendProfile = lazy(()=>import('../components/friend-profile/index'));
 
 export const Routing = ()=>{
   return(
