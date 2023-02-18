@@ -2,6 +2,11 @@
   text-align: center;
   position: relative;
 }
+.main_layout .header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
 
 .main_layout .ant-layout .ant-layout-content {
   height: 100%;

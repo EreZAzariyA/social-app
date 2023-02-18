@@ -2,7 +2,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: whitesmoke;
+  background-image: url('../../../../public/images/main-background.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  /* background-color: whitesmoke; */
 }
 
 .home_main_container .home_inner_container {
