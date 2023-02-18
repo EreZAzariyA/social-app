@@ -52,7 +52,7 @@ export const Login = ()=>{
         </Form.Item>
 
       </Form>
-      <div>
+      <div className="action">
         <p>D`ont Have Account <NavLink to={'/auth/register'}>Sing-Up</NavLink></p>
       </div>
     </div>

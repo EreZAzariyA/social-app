@@ -5,6 +5,10 @@
   background-repeat: repeat-y;
   background-size: cover;
   position: relative;
+  color: white;
+}
+.auth_layout .action {
+  color: white;
 }
 
 .auth_layout .header {

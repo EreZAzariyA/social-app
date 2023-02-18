@@ -62,7 +62,7 @@ export const Register = ()=>{
             </Button>
           </Form.Item>
       </Form>
-      <div>
+      <div className="action">
         <p>Already Have Account <NavLink to={'/auth/login'}>Sing-In</NavLink></p>
       </div>
     </div>
